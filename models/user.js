@@ -4,6 +4,8 @@ const fs = require('fs');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 
+const publicKey = fs.readFileSync(path.join(__dirname, '../config') + '/public.key', 'utf8');
+const privateKey = fs.readFileSync(path.join(__dirname, '../config') + '/private.key', 'utf8');
 
 const SALT_ROUNDS = 13;
 

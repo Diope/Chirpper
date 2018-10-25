@@ -4,14 +4,14 @@ const fs = require('fs');
 const path = require('path');
 
 const publicKey = fs.readFileSync(path.join(__dirname, '../config') + '/public.key', 'utf8');
-const privateKey = fs.readFileSync(path.join(__dirname, '../config') + '/private.key', 'utf8')
+const privateKey = fs.readFileSync(path.join(__dirname, '../config') + '/private.key', 'utf8');
 const signOptions = {
   issuer: 'dipet.me',
-  expiresIn: '15d',
+  expiresIn: '15d', 
   algorithm: "RS256"
 }
 
-exports.signup = async function(req, res, next) {
+exports.signup = function(req, res, next) {
   let id = req.body.id
   let username = req.body.profile.username
   let email = req.body.email
@@ -30,4 +30,22 @@ exports.signup = async function(req, res, next) {
   })
 }
 
-exports.signin = function(){}
+exports.signin = async function(req, res, next){
+  // let id = req.body.id
+  // let username = req.body.profile.username
+  try {
+    let user = await db.User.findOne({email: req.body.email});
+    if (!user) {
+      return next({message: `The email ${req.body.email} could not be found, please try a different email`})
+    }
+    let isMatch = await user.comparePassword(req.body.password)
+    if (!isMatch) {
+      return next({status: 400, message: "The supplied password is incorrect, please try again"})
+    } else {
+      let token = jwt.sign({id: user.id, username: user.profile.username, email: user.email}, privateKey, signOptions)
+      return res.status(200).json({username: user.profile.username, user: user.email, token})
+    }
+  }catch (err) {
+    return next({status: 400, message: "Invalid email or password"})
+  }
+}
