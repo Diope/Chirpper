@@ -6,6 +6,9 @@
   "author": "Dion Pettaway",
   "license": "MIT",
   "private": false,
+  "scripts": {
+    "serve": "nodemon server.js"
+  },
   "dependencies": {
     "bcrypt": "3.0.2",
     "body-parser": "1.18.3",
@@ -13,5 +16,8 @@
     "express": "4.16.4",
     "jsonwebtoken": "8.3.0",
     "mongoose": "5.3.4"
+  },
+  "devDependencies": {
+    "nodemon": "1.18.4"
   }
 }
