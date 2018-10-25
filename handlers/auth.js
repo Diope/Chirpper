@@ -11,7 +11,7 @@ const signOptions = {
   algorithm: "RS256"
 }
 
-exports.signup = function(req, res, next) {
+exports.signup = function(req, res, next) { // TODO: convert to async
   let id = req.body.id
   let username = req.body.profile.username
   let email = req.body.email
@@ -31,8 +31,7 @@ exports.signup = function(req, res, next) {
 }
 
 exports.signin = async function(req, res, next){
-  // let id = req.body.id
-  // let username = req.body.profile.username
+
   try {
     let user = await db.User.findOne({email: req.body.email});
     if (!user) {
