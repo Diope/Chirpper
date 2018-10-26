@@ -17,7 +17,7 @@ const UserSchema = Schema({
     required: true,
     unique: true,
     validate: [
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, "Email is not valid, please enter a valid email"
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, "We're sorry, your email is incorrectly formatted please enter a valid email"
     ],
     lowercase: true,
     index: true
@@ -26,20 +26,23 @@ const UserSchema = Schema({
     type: String,
     required: true
   },
-  profile: {
-    profilePhoto: {type: String},
-    chirpperName: {
-      type: String, trim: true, minlength: [1, "Chirppername must be at least 1 character long"], maxlength: [25, "Chirpper name must be no longer than 25 characters"]
-    },
-    username: {
-      type: String,
-      required: true,
-      minlength: [3, "Username must be at least 3 characters long"],
-      maxlength: [25, "Username must be no longer than 25 characters"],
-      unique: true,
-      trim: true
-    },
-  }
+  profilePhoto: {type: String},
+  backgroundPhoto: {type:String},
+  chirpperName: {
+    type: String, trim: true, minlength: [1, "Chirppername must be at least 1 character long"], maxlength: [25, "Chirpper name must be no longer than 25 characters"]
+  },
+  username: {
+    type: String,
+    required: true,
+    minlength: [3, "Username must be at least 3 characters long"],
+    maxlength: [25, "Username must be no longer than 25 characters"],
+    unique: true,
+    trim: true
+  },
+  tweets: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Tweet'
+  }]
 });
 
 UserSchema.pre('save', async function(next) { // I really need to start usnig async/await more.
@@ -87,7 +90,7 @@ UserSchema.methods.generateJWT = async function(next) {
 
   let payload = {
     id: user._id,
-    username: user.profile.username,
+    username: user.username,
     email: user.email
   }
 
