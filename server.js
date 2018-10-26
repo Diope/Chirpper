@@ -5,6 +5,7 @@ const path = require('path');
 const cors = require('cors');
 
 const errorHandler = require("./controllers/error");
+const {loginRequired, correctUser} = require('./middleware/authorization');
 const authRoutes = require('./routes/auth')
 const tweetRoutes = require('./routes/tweets');
 
@@ -13,7 +14,7 @@ bodyParser.urlencoded({ extended: false })
 app.use(bodyParser.json());
 
 app.use('/api', authRoutes);
-app.use('/api/users/:id/tweets', tweetRoutes);
+app.use('/api/users/:id/tweets', loginRequired, correctUser, tweetRoutes);
 
 app.use((req, res, next) => {
   let err = new Error("Whoops! Looks like something went horribly, horribly wrong here!");
