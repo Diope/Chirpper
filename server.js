@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const path = require('path');
 const cors = require('cors');
+const db = require('./models');
 
 const errorHandler = require("./controllers/error");
 const authRoutes = require('./routes/auth')
@@ -14,6 +15,14 @@ app.use(bodyParser.json());
 
 app.use('/api', authRoutes);
 app.use('/api/users/:id/tweets', tweetRoutes);
+app.get("/api/messages", async function(req, res, next) {
+  try {
+    let messages = await db.Message.find({}).sort({createdAt: "desc"}).populate("user", {username: true,profilePhoto: true })
+    return res.status(200).json(messages)
+  } catch (err) {
+    return next(err)
+  }
+})
 
 app.use((req, res, next) => {
   let err = new Error("Whoops! Looks like something went horribly, horribly wrong here!");
