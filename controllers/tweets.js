@@ -50,7 +50,7 @@ exports.deleteTweet = async function(req, res, next){
 
 exports.getAllTweets = async function(req, res, next) {
   try {
-    let messages = await db.Message.find({}).limit(50)
+    let messages = await db.Message.find({}).sort({createdAt: "desc"})
     if (!messages) {
       return next({status: 401, message: "Oh dear, looks like our servers have derped when they should have beep booped!"})
     }
