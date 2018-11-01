@@ -6,10 +6,78 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 62.5%; 
+  font-size: 62.5%;
 }
 
+label {
+  font-size: 1rem;
+}
+
+.navbar {
+  margin-bottom: 1rem;
+}
+
+.navbar a {
+  font-weight: bold;
+  color: #2AA3EF;
+}
+
+.navbar li:hover {
+  color: white;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.navbar.navbar-expand {
+  margin-bottom: 0;
+}
+
+.navbar-brand > img {
+  display: inline-block;
+  width: 2rem;
+  margin-bottom: .2rem;
+  margin-right: .5rem;
+  border-radius: .2rem;
+}
+
+ul.nav.navbar-nav li {
+  margin: 0 0.5rem;
+  font-size: .8rem;
+}
+
+.onBoard > .navbar {
+  background-color: RGB(240, 240, 240);
+  box-shadow: 0 0 6px rgba(0,0,0,0.2)
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+
+.hero__log {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  top: 0;
+  left: 0;
+  margin: auto 0;
+  height: 100vh;
+  width: 100vw;
+  background-image: url('./images/twitter.svg');
+  z-index: -1;
+  background-color: #1da1f2;
+}
+
+.hero__text-align {
+  color: white;
+}
+
+.container {
+  /* padding: 0;
+  margin: 0; */
+  background-color: white;
+  
 }
