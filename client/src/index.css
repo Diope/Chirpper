@@ -45,6 +45,10 @@ ul.nav.navbar-nav li {
   font-size: .8rem;
 }
 
+.alert {
+  font-size: 0.9rem;
+}
+
 .onBoard > .navbar {
   background-color: RGB(240, 240, 240);
   box-shadow: 0 0 6px rgba(0,0,0,0.2)
