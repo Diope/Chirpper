@@ -1,6 +1,6 @@
 import { LOAD_TWEETS, REMOVE_TWEET } from '../actionTypes'
 
-const tweet = (state=[], action) => {
+const tweets = (state=[], action) => {
   switch (action.type) {
     case LOAD_TWEETS:
       return [...action.tweets]
@@ -9,4 +9,4 @@ const tweet = (state=[], action) => {
   }
 }
 
-export default tweet;
+export default tweets;

@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 // ROUTES
 app.use('/api', authRoutes);
 app.use('/api/users/:id/tweets', loginRequired, correctUser, tweetRoutes);
-app.get("/api/messages", async function(req, res, next) {
+app.get("/api/tweets", async function(req, res, next) {
   try {
     let messages = await db.Tweet.find({}).sort({createdAt: "desc"}).populate("user", {username: true,profilePhoto: true })
     return res.status(200).json(messages)
