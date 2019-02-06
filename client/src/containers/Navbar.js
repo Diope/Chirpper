@@ -4,16 +4,24 @@ import {connect} from "react-redux";
 
 import {logout} from '../store/actions/auth';
 
+let styles = {
+  nav: {
+    position: 'fixed',
+    top: 0,
+    width: '100%',
+    zIndex:3
+  }
+}
+
 class Navbar extends Component {
   logout = (event) => {
     event.preventDefault();
     this.props.logout();
   }
 
-  state = {  }
   render() { 
     return ( 
-      <nav className="navbar navbar-expand">
+      <nav className="navbar navbar-expand" style={styles.nav}>
         <div className="container-fluid">
           <Link to="/" className="navbar-brand">
             Chirpper

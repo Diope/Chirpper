@@ -27,7 +27,7 @@ exports.createTweet = async function(req, res, next){
 
 exports.getTweet = async function(req, res, next){
   try {
-    let message = await db.Message.find(req.params.message_id);
+    let message = await db.Tweet.find(req.params.tweet_id);
     if (!message) {
       return next({status: 401, message: "Chirp could not be found, perhaps it has been deleted? 🤔"})
     }

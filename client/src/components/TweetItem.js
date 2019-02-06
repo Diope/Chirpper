@@ -3,16 +3,36 @@ import Moment from 'react-moment';
 import {Link} from 'react-router-dom';
 import defaultAvatar from '../images/default-avatar.png';
 
+let styles = {
+  avatar: {
+    borderRadius: '50%',
+    height: 50,
+    width: 50
+  },
+  profilePhotoContainer: {
+    padding: '0px 15px'
+  },
+  listItem: {
+    display: 'flex',
+    alignItem: 'flex-start',
+    padding: '8px 0px',
+    minHeight: '120px',
+    borderRadius: 0
+  }
+}
+
 const TweetItem = ({date, profilePhoto, text, username}) => (
   <div>
-    <img src={profilePhoto || defaultAvatar} alt={username} height="42" width="42" className="timeline-avatar" />
-    <div className="tweet-area">
-      <Link to="#">@{username}&nbsp;</Link>
-      <span className="text-muted">
-        <Moment className="text-muted" format="Do MM YYYY">{date}</Moment>
-      </span>
-      <div className="tweet">{text}</div>
-    </div>
+    <li className="list-group-item" style={styles.listItem}>
+      <div className="profilephoto" style={styles.profilePhotoContainer}>
+        <img src={profilePhoto || defaultAvatar} alt={username} className="timeline-avatar" style={styles.avatar} />
+      </div>
+      <div className="tweet-area">
+        <Link to="#">@{username}&nbsp;</Link>
+        <span className="text-muted">・<Moment fromNow>{date}</Moment></span>
+        <div className="tweet">{text}</div>
+      </div>
+    </li>
   </div>
 )
 

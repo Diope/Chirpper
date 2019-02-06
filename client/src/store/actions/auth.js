@@ -13,12 +13,11 @@ export function setAuthToken(token) {
   setHeaderToken(token)
 }
 
-export function logout() {
-  return dispatch => {
+export const logout = (history) => dispatch => {
     localStorage.clear();
     setAuthToken(false);
     dispatch(setCurrentUser({}))
-  }
+    history.push("/")
 }
 
 export function authUser(type, userData) {

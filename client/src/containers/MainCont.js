@@ -1,18 +1,30 @@
 import React, { Component } from 'react'
-import {Switch, Route, withRouter, Redirect } from 'react-router-dom'
+import {Switch, Route, withRouter } from 'react-router-dom'
 import {connect} from 'react-redux';
 import Homepage from '../components/Homepage';
 import AuthForm from '../components/AuthForm';
+// import TweetForm from ''
 
 import {authUser} from '../store/actions/auth';
 import {removeError} from '../store/actions/errors'
 
+import withAuth from '../HOC/withAuth';
+
+let styles = {
+  container: {
+    marginTop: 75,
+    marginBottom: 75
+  }
+}
+
 const MainCont = (props) => {
   const {authUser, errors, removeError, currentUser} = props;
   return ( 
-    <div className="container">
+    <div className="container" style={styles.container}>
       <Switch>
-        <Route exact path="/" render={props => <Homepage currentUser={currentUser} {...props}/>} />
+        <Route exact path="/" 
+          render={props => <Homepage currentUser={currentUser} {...props} />} 
+        />
         <Route exact path="/signin" render={props => {
           return (
             <AuthForm
@@ -38,6 +50,7 @@ const MainCont = (props) => {
             />
           )
         }} />
+        
       </Switch>
     </div>
    );

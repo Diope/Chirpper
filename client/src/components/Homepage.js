@@ -16,9 +16,9 @@ const Homepage = ({currentUser}) => {
     );
   }
    return (
-    <div>
+    <React.Fragment>
       <TweetTimeLine />
-    </div>
+    </React.Fragment>
   );
 };
  

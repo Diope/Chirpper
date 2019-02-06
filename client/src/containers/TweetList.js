@@ -14,7 +14,7 @@ class TweetList extends Component {
       <TweetItem 
         key={t._id}
         date={t.createdAt}
-        text={t.text}
+        text={t.tweet}
         username={t.user.username}
         profilePhoto={t.user.profilePhoto}
       />
@@ -24,7 +24,15 @@ class TweetList extends Component {
         <h1>LOADING</h1>
       )
     } else {
-      return tweetList;
+      return (
+        <div className="col-sm-8">
+          <div className="offset-1 col-sm-10">
+            <ul className="list-group" id="tweets">
+             {tweetList}
+            </ul>
+          </div>
+        </div>
+      )
     }
   }
 }

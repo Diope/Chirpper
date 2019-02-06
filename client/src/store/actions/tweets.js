@@ -10,7 +10,10 @@ export const loadTweets = tweets => ({
 export const fetchTweets = () => {
   return dispatch => {
     return apiCall("get", "/api/tweets")
-      .then(tweets => dispatch(loadTweets(tweets)))
+      .then(tweets => {
+        console.log(tweets)
+        dispatch(loadTweets(tweets))
+      })
       .catch(err => addError(err.message))
   }
 }

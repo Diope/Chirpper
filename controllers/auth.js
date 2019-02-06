@@ -24,6 +24,7 @@ exports.signup = function(req, res, next){ // TODO: convert to async
         return next(new Error(`The email ${email} is already in use.`))
       }
     }
+    
     db.User.create(req.body).then(result => {
       console.log(result)
       let token = jwt.sign({id: result._id, username:result.username, email: result.email}, privateKey, signOptions)
